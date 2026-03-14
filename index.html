@@ -172,7 +172,7 @@
 
     <!-- Background Music (Audio Element) -->
     <audio id="bg-music" loop>
-        <source src="https://jumpshare.com/s/srOam2RmIMtlorHCUfEB" type="audio/mpeg">
+        <source src="song.mp3" type="audio/mpeg">
     </audio>
 
     <div id="music-control" class="hidden" onclick="toggleMusic()">
@@ -374,7 +374,7 @@
             reveals.forEach(reveal => observer.observe(reveal));
         }
 
-        const apiKey = "AIzaSyA_K_Umi7-hcXqaX7Jas0F5_y6KBSl3BJk"; 
+        const apiKey = ""; 
 
         async function fetchGeminiWithRetry(prompt, retries = 5) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
