@@ -293,6 +293,21 @@
                     Out of all the pictures from that day, this one feels a little more special to me. Maybe because it captures something very natural, two people simply standing together, sharing a moment without even trying to make it perfect. When I look at this photo, it reminds me how some moments don’t need words to feel meaningful. Just being in the same frame with you was enough to make it memorable for me. Time will move forward and life will take us to different places, but this picture will always remind me of a moment where everything felt simple, calm, and quietly beautiful. Some memories are not loud or dramatic, they are gentle, and those are often the ones that stay the longest in the heart. 🤍
                 </p>
             </section>
+
+          <!-- Poem Section (Interactive Logic) -->
+            <section class="letter-content rounded-[2rem] p-8 md:p-12 reveal border-2 border-rose-100 bg-white shadow-lg">
+                <div class="text-center mb-8">
+                    <h3 class="text-4xl md:text-5xl text-rose-800 mb-3 font-handwritten">Magic for Anudipta</h3>
+                    <p class="text-gray-500 text-sm font-sans tracking-wide">Enter any word of your choice, and see it woven into a verse for you.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
+                    <input type="text" id="poem-theme" placeholder="Type anything..." class="px-6 py-3 rounded-full bg-rose-50 border border-rose-100 focus:outline-none focus:ring-2 focus:ring-rose-200 w-full text-gray-700">
+                    <button onclick="generatePoem()" id="generate-btn" class="bg-rose-600 hover:bg-rose-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-md flex items-center justify-center gap-2 shrink-0">
+                        <span id="btn-text" class="whitespace-nowrap flex items-center gap-2">Inspire ✨</span>
+                    </button>
+                </div>
+                <div id="poem-output" class="mt-8 text-center text-2xl md:text-3xl font-handwritten text-rose-700 hidden flex-col items-center justify-center p-6 bg-rose-50/50 rounded-xl min-h-[150px]"></div>
+            </section>
         </article>
 
         <footer class="mt-24 text-center pb-20 reveal">
@@ -374,45 +389,106 @@
             reveals.forEach(reveal => observer.observe(reveal));
         }
 
-        const apiKey = ""; 
+        // MASSIVE POEM ENGINE (Combinatorial logic to exceed 1000+ variations)
+        const poemEngine = {
+            openers: [
+                (w) => `In the whisper of ${w}, a dream takes flight,`,
+                (w) => `Like the softest ${w} in the morning light,`,
+                (w) => `Beyond the beauty of ${w}, clear and true,`,
+                (w) => `If ${w} were a song I could sing for a lifetime,`,
+                (w) => `Through every ${w} that the seasons may bring,`,
+                (w) => `When the world finds its peace in a single ${w},`,
+                (w) => `Sweeter than ${w} on a breeze in July,`,
+                (w) => `Higher than ${w} reaching up to the sky,`,
+                (w) => `In the quietest ${w} of the deepest night,`,
+                (w) => `As constant as ${w}, as steady as time,`,
+                (w) => `More radiant than ${w} at the edge of the sea,`,
+                (w) => `With the magic of ${w} dancing wild and free,`,
+                (w) => `Woven from ${w} and the stars up above,`,
+                (w) => `Though the universe speaks of a beautiful ${w},`,
+                (w) => `Every shadow of ${w} fades quickly away,`,
+                (w) => `Just like ${w} brings the promise of spring,`,
+                (w) => `In the rhythm of ${w}, in the heart of the storm,`,
+                (w) => `While the essence of ${w} keeps our spirits so warm,`,
+                (w) => `If the story of ${w} was written in gold,`,
+                (w) => `In the sparkle of ${w}, a secret is told,`
+            ],
+            midlines: [
+                (n) => `I find the reflection of ${n}'s sweet face,`,
+                (n) => `My heart finds its home in ${n}'s warm embrace,`,
+                (n) => `Nothing compares to ${n}'s effortless grace,`,
+                (n) => `${n} is the star that no sky can replace,`,
+                (n) => `I treasure the light in ${n}'s laughing eyes,`,
+                (n) => `${n} is the truth beneath all of the lies,`,
+                (n) => `I see ${n}'s spirit, a beautiful prize,`,
+                (n) => `With ${n} as my compass, my happiness grows,`,
+                (n) => `The depth of my love for ${n} only He knows,`,
+                (n) => `${n} is the garden where everything blows,`,
+                (n) => `For ${n} is the melody my soul always chose,`,
+                (n) => `I'll stand by ${n} through the highs and the lows,`,
+                (n) => `${n} is the light that eternally glows,`,
+                (n) => `My devotion to ${n} naturally flows,`,
+                (n) => `Within ${n}'s kindness, a sanctuary grows,`,
+                (n) => `To the rhythm of ${n}, my heartbeat bestows,`,
+                (n) => `${n} is the flower that perfectly grows,`,
+                (n) => `In the presence of ${n}, my spirit finds rest,`,
+                (n) => `To be loved by ${n} is to be truly blessed,`,
+                (n) => `Of all the world's treasures, ${n} is the best,`
+            ],
+            closers: [
+                (n) => `A love for Anudipta that's passed every test.`,
+                (n) => `With Anu, I've found my eternal quest.`,
+                (n) => `In Anuu's arms, I am truly at rest.`,
+                (n) => `My darling Anudipta, you're better than the rest.`,
+                (n) => `A promise to Anu that I'll always be true.`,
+                (n) => `My heart belongs only, sweet Anuu, to you.`,
+                (n) => `Anudipta, you make every old dream feel new.`,
+                (n) => `I'm hopelessly, deeply, in love, Anu, with you.`,
+                (n) => `For Anuu, the sky will be forever blue.`,
+                (n) => `Anudipta, the one who brings color to view.`,
+                (n) => `Anu, you're the dream that I always pursue.`,
+                (n) => `To the soul of Anuu, a love that is true.`,
+                (n) => `Anudipta, the anchor that pulls me right through.`,
+                (n) => `My world is a masterpiece, Anu, with you.`,
+                (n) => `Anuu, you're the star that I'll never subdue.`,
+                (n) => `Anudipta, my heart beats entirely for you.`,
+                (n) => `In the eyes of Anu, a heaven I view.`,
+                (n) => `Anuu, my love is a debt that is due.`,
+                (n) => `Anudipta, my darling, my life starts with you.`,
+                (n) => `For Anu, a devotion that's honest and true.`
+            ]
+        };
 
-        async function fetchGeminiWithRetry(prompt, retries = 5) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: "You are a poet writing for Anudipta (nickname Anu). Elegant and romantic tone. 4 lines." }] }
-            };
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const resp = await fetch(url, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)});
-                    if (!resp.ok) throw new Error();
-                    const data = await resp.json();
-                    return data.candidates[0].content.parts[0].text;
-                } catch (e) {
-                    if (i === retries - 1) throw e;
-                    await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
-                }
-            }
-        }
+        const nameVariants = ["Anudipta", "Anuu", "Anu"];
 
-        async function generatePoem() {
-            const theme = document.getElementById('poem-theme').value.trim() || "Anu";
+        function generatePoem() {
+            const rawInput = document.getElementById('poem-theme').value.trim();
             const btnText = document.getElementById('btn-text');
             const output = document.getElementById('poem-output');
-            btnText.innerHTML = `Whispering... <i data-lucide="sparkle" class="w-4 h-4 animate-spin"></i>`;
+            
+            if (!rawInput) return;
+
+            const word = rawInput.charAt(0).toUpperCase() + rawInput.slice(1).toLowerCase();
+            const chosenName = nameVariants[Math.floor(Math.random() * nameVariants.length)];
+            
+            btnText.innerHTML = `Writing for Anuu... <i data-lucide="sparkle" class="w-4 h-4 animate-spin"></i>`;
             lucide.createIcons();
             
             output.classList.remove('hidden');
-            output.classList.add('flex');
-            output.innerHTML = `<span class="animate-pulse text-rose-300 text-sm font-sans uppercase tracking-widest">Finding words...</span>`;
-            try {
-                const text = await fetchGeminiWithRetry(`Write a 4 line poem for Anudipta about ${theme}.`);
-                output.innerHTML = `<p class="leading-relaxed">${text.trim().replace(/\n/g, '<br>')}</p>`;
-            } catch (e) {
-                output.innerHTML = `<p class="text-sm font-sans text-red-400">The stars are shy right now...</p>`;
-            } finally {
+            output.innerHTML = `<span class="animate-pulse text-rose-300 text-sm font-sans uppercase">Searching 1000+ verses for ${chosenName}...</span>`;
+
+            setTimeout(() => {
+                // Combinatorial Selection: 20 openers * 20 midlines * 20 closers = 8000 unique combinations
+                const opener = poemEngine.openers[Math.floor(Math.random() * poemEngine.openers.length)](word);
+                const midline = poemEngine.midlines[Math.floor(Math.random() * poemEngine.midlines.length)](chosenName);
+                const closer = poemEngine.closers[Math.floor(Math.random() * poemEngine.closers.length)](chosenName);
+
+                const finalPoem = `${opener}<br>${midline}<br>${closer}`;
+
+                output.innerHTML = `<p class="leading-relaxed animate-in fade-in zoom-in duration-700">${finalPoem}</p>`;
                 btnText.innerHTML = `Inspire ✨`;
-            }
+                lucide.createIcons();
+            }, 1000);
         }
     </script>
 </body>
