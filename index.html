@@ -165,7 +165,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.65);
+            background: rgba(0,0,0,0.9);
             z-index: 2000;
             align-items: center;
             justify-content: center;
@@ -173,28 +173,18 @@
         }
         #video-modal.active { display: flex; }
         .video-card {
-            width: min(92vw, 320px);
+            width: min(90vw, 280px);
             aspect-ratio: 9 / 16;
             border-radius: 1rem;
             overflow: hidden;
-            background: #000;
-            box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 0 50px rgba(236,72,153,0.35), 0 0 35px rgba(236,72,153,0.25);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: black;
+            box-shadow: 0 0 12px rgba(236,72,153,0.4), 0 0 40px rgba(236,72,153,0.25);
+            border: 1px solid rgba(255,255,255,0.12);
         }
         .video-card iframe {
             width: 100%;
             height: 100%;
             border: 0;
-        }
-        .close-video-btn {
-            color: white;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            font-size: 0.72rem;
-            transition: color 0.2s ease;
-        }
-        .close-video-btn:hover {
-            color: #fda4af;
         }
         .play-btn-pulse {
             animation: pulse-ring 2s infinite;
@@ -370,12 +360,12 @@
     <div id="video-modal">
         <div class="flex flex-col items-center justify-center w-full max-w-4xl relative">
             <div class="relative">
-                <button onclick="closeVideoSurprise()" class="absolute top-2 right-2 text-white flex items-center gap-1 hover:text-rose-400 transition-colors close-video-btn" style="z-index:20;">
+                <button onclick="closeVideoSurprise()" class="absolute -top-8 right-0 text-white flex items-center gap-2 hover:text-rose-400 transition-colors close-video-btn" style="z-index:20; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.3); border-radius:999px; padding:0.2rem 0.45rem;">
                     <i data-lucide="x-circle" class="w-4 h-4"></i>
                     <span class="text-[10px] font-bold uppercase tracking-widest">Close</span>
                 </button>
-                    <div class="video-card">
-                    <iframe id="surprise-vdo" src="https://player.vimeo.com/video/1173891978?badge=0&autopause=0&player_id=0&app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Anudipta" allowfullscreen loading="lazy"></iframe>
+                <div class="video-card">
+                    <iframe id="surprise-vdo" src="" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Anudipta" allowfullscreen loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -421,7 +411,6 @@
 
         function closeVideoSurprise() {
             videoModal.classList.remove('active');
-            // Stop the Vimeo player by resetting src
             surpriseVdo.src = '';
             audio.play(); // Resume background music
         }
