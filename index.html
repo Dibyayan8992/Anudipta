@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Anudipta ❤️ - From Dibyayan 😉</title>
-    <!-- Favicon: Red Heart SVG -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -161,6 +160,27 @@
             transform: scale(1.1);
         }
 
+        /* VIDEO MODAL STYLES */
+        #video-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        #video-modal.active { display: flex; }
+        .play-btn-pulse {
+            animation: pulse-ring 2s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(225, 29, 72, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+        }
+
         main {
             min-height: 100vh;
             display: flex;
@@ -172,7 +192,6 @@
 
     <div class="hearts-container" id="hearts-container"></div>
 
-    <!-- Background Music (Audio Element) -->
     <audio id="bg-music" loop>
         <source src="song.mp3" type="audio/mpeg">
     </audio>
@@ -181,7 +200,6 @@
         <i id="music-icon" data-lucide="music" class="w-6 h-6 text-rose-600"></i>
     </div>
 
-    <!-- OPENING SCREEN -->
     <div id="intro-screen" class="fixed inset-0 z-50 bg-[#fff8f8]">
         <div class="envelope-wrapper w-full h-full relative cursor-pointer group" onclick="openLetter()">
             <div class="relative bg-white w-[90%] max-w-[400px] h-auto min-h-[500px] shadow-[0_35px_60px_-15px_rgba(225,29,72,0.2)] rounded-lg flex flex-col items-center justify-between p-10 border border-rose-50 overflow-hidden">
@@ -203,7 +221,6 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <main id="main-content" class="opacity-0 transition-opacity duration-1000 hidden max-w-3xl mx-auto px-6 py-16 relative z-10">
         <header class="text-center mb-16 reveal">
             <span class="font-handwritten text-4xl text-rose-500 block mb-2">Hello, beautiful</span>
@@ -216,7 +233,6 @@
         </header>
 
         <article class="space-y-12">
-            <!-- Letter -->
             <section class="letter-content rounded-[2rem] p-8 md:p-12 reveal">
                 <p class="text-lg leading-relaxed text-gray-700 mb-6 drop-cap">
                     Anudipta, today feels a little emotional for me because a chapter of our lives has quietly come to an end. Even though time moved so fast, there is something I want you to know from my heart. I truly wish we had started talking much earlier, because the moments we shared made me realize how special you are to me. In such a short time you became someone I care about deeply. It’s not just about school ending or not seeing each other there anymore, what matters more to me is the bond and feelings I developed for you.
@@ -228,7 +244,6 @@
                 </p>
             </section>
 
-            <!-- Photo 1 -->
             <section class="reveal">
                 <div class="photo-frame relative group max-w-2xl">
                     <img src="https://i.ibb.co/GQ74k7cJ/Whats-App-Image-2026-03-14-at-11-20-06.jpg" alt="Moment 1">
@@ -238,14 +253,12 @@
                 </div>
             </section>
 
-            <!-- Para 1 -->
             <section class="letter-content rounded-[2rem] p-8 md:p-12 reveal">
                 <p class="text-lg leading-relaxed text-gray-700">
                     This picture will always remain one of my most special memories. It’s not just a photo, it’s a moment where happiness, comfort, and unspoken feelings were captured together. Standing beside you in that moment felt so natural, like everything around us paused for a second. Your smile in this picture is something I will always remember, because it carries a warmth that makes every memory brighter. Maybe it was just a simple selfie, but for me it holds something deeper, a reminder of how special you are to me and how lucky I felt sharing even these small moments with you. Some pictures fade with time, but this one will always stay close to my heart. 🤍
                 </p>
             </section>
 
-            <!-- Photo 2 -->
             <section class="reveal">
                 <div class="photo-frame relative group max-w-2xl">
                     <img src="https://i.ibb.co/kVfPZL6d/Whats-App-Image-2026-03-14-at-11-20-07.jpg" alt="Moment 2">
@@ -255,14 +268,12 @@
                 </div>
             </section>
 
-            <!-- Para 2 -->
             <section class="letter-content rounded-[2rem] p-8 md:p-12 reveal">
                 <p class="text-lg leading-relaxed text-gray-700">
                     This picture captures a moment that feels very special to me. Standing beside you like this felt simple, yet it meant so much in my heart. Sometimes memories are not about big events, but about quiet moments where you are next to someone who means a lot to you. Looking at this photo reminds me of how happy I felt just being there with you. Your presence has always brought a kind of warmth and peace that is hard to explain in words. Maybe this was just one moment in time, but for me it became a memory I will always treasure. Some moments pass, but the feeling they leave behind stays forever, and this picture will always remind me of that beautiful feeling. 🤍
                 </p>
             </section>
 
-            <!-- Photo 3 -->
             <section class="reveal">
                 <div class="photo-frame relative group max-w-2xl">
                     <img src="https://i.ibb.co/6668qZ1/Whats-App-Image-2026-03-14-at-11-20-07-1.jpg" alt="Moment 3">
@@ -272,14 +283,12 @@
                 </div>
             </section>
 
-            <!-- Para 3 -->
             <section class="letter-content rounded-[2rem] p-8 md:p-12 reveal">
                 <p class="text-lg leading-relaxed text-gray-700">
                     This look feels so vibrant and beautiful. The bright yellow outfit gives such a warm, radiant vibe, almost like carrying a little sunshine in the moment. It has that perfect blend of traditional grace and simple elegance that makes the whole look stand out effortlessly. Sometimes it’s not about heavy styling or complicated fashion, just the right color, the right confidence, and the natural charm of the moment make everything look perfect. This fit truly captures a bright, graceful, and timeless vibe. 💛
                 </p>
             </section>
 
-            <!-- Photo 4 -->
             <section class="reveal">
                 <div class="photo-frame relative group max-w-2xl">
                     <img src="https://i.ibb.co/LX6gcxt4/Whats-App-Image-2026-03-14-at-11-20-07-2.jpg" alt="Moment 4">
@@ -289,15 +298,13 @@
                 </div>
             </section>
 
-            <!-- Para 4 -->
             <section class="letter-content rounded-[2rem] p-8 md:p-12 reveal">
                 <p class="text-lg leading-relaxed text-gray-700">
                     Out of all the pictures from that day, this one feels a little more special to me. Maybe because it captures something very natural, two people simply standing together, sharing a moment without even trying to make it perfect. When I look at this photo, it reminds me how some moments don’t need words to feel meaningful. Just being in the same frame with you was enough to make it memorable for me. Time will move forward and life will take us to different places, but this picture will always remind me of a moment where everything felt simple, calm, and quietly beautiful. Some memories are not loud or dramatic, they are gentle, and those are often the ones that stay the longest in the heart. 🤍
                 </p>
             </section>
 
-          <!-- Poem Section -->
-            <section class="letter-content rounded-[2rem] p-8 md:p-12 reveal border-2 border-rose-100 bg-white shadow-lg">
+          <section class="letter-content rounded-[2rem] p-8 md:p-12 reveal border-2 border-rose-100 bg-white shadow-lg">
                 <div class="text-center mb-8">
                     <h3 class="text-4xl md:text-5xl text-rose-800 mb-3 font-handwritten">Magic for Anudipta</h3>
                     <p class="text-gray-500 text-sm font-sans tracking-wide">Enter any word of your choice, and see it woven into a verse for you!<br>(For example: Sky, Universe, Galaxy, Stars and more)</p>
@@ -310,6 +317,17 @@
                 </div>
                 <div id="poem-output" class="mt-8 text-center text-2xl md:text-3xl font-handwritten text-rose-700 hidden flex-col items-center justify-center p-6 bg-rose-50/50 rounded-xl min-h-[150px]"></div>
             </section>
+
+            <section class="reveal text-center py-10">
+                <h2 class="font-handwritten text-5xl text-rose-600 mb-6">I love you Anuu ❤️</h2>
+                <div class="relative inline-block">
+                    <button onclick="playVideoSurprise()" class="play-btn-pulse bg-rose-600 hover:bg-rose-700 text-white w-24 h-24 rounded-full flex items-center justify-center shadow-2xl transition-transform active:scale-90">
+                        <i data-lucide="play" class="w-10 h-10 fill-current ml-1"></i>
+                    </button>
+                </div>
+                <p class="mt-6 text-rose-400 font-bold tracking-widest text-xs uppercase">Tap for a special memory</p>
+            </section>
+
         </article>
 
         <footer class="mt-24 text-center pb-20 reveal">
@@ -325,15 +343,28 @@
         </footer>
     </main>
 
+    <div id="video-modal">
+        <div class="relative w-full max-w-4xl">
+            <button onclick="closeVideoSurprise()" class="absolute -top-12 right-0 text-white flex items-center gap-2 hover:text-rose-400 transition-colors">
+                <span class="text-sm font-bold uppercase tracking-widest">Close</span>
+                <i data-lucide="x-circle" class="w-8 h-8"></i>
+            </button>
+            <div class="bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(225,29,72,0.5)]">
+                <iframe id="surprise-vdo" class="w-full aspect-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
     <script>
         lucide.createIcons();
 
         const audio = document.getElementById('bg-music');
         const musicControl = document.getElementById('music-control');
         const musicIcon = document.getElementById('music-icon');
+        const surpriseVdo = document.getElementById('surprise-vdo');
+        const videoModal = document.getElementById('video-modal');
 
         function openLetter() {
-            // Start music on user interaction
             audio.play().catch(e => console.log("Audio play blocked", e));
             musicControl.classList.remove('hidden');
 
@@ -351,6 +382,23 @@
             }, 800);
         }
 
+        // VIDEO SURPRISE LOGIC
+        function playVideoSurprise() {
+            surpriseVdo.src = 'https://www.youtube.com/embed/BTMtI8oXSdc?autoplay=1&rel=0';
+            videoModal.classList.add('active');
+            audio.pause(); // Stop music so it doesn't clash
+            // Trigger extra heart rain for the moment
+            for(let i=0; i<15; i++) {
+                setTimeout(spawnHeart, i * 100);
+            }
+        }
+
+        function closeVideoSurprise() {
+            videoModal.classList.remove('active');
+            surpriseVdo.src = '';
+            audio.play(); // Resume background music
+        }
+
         function toggleMusic() {
             if (audio.paused) {
                 audio.play();
@@ -362,22 +410,24 @@
             lucide.createIcons();
         }
 
-        function createHearts() {
+        function spawnHeart() {
             const container = document.getElementById('hearts-container');
             const icons = ['❤️', '💖', '✨', '💕'];
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                const leftPos = Math.random() * 100;
-                const size = (Math.random() * 1) + 0.5;
-                const duration = (Math.random() * 8) + 8;
-                heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-                heart.style.left = `${leftPos}vw`;
-                heart.style.fontSize = `${size}rem`;
-                heart.style.animationDuration = `${duration}s`;
-                container.appendChild(heart);
-                setTimeout(() => heart.remove(), duration * 1000);
-            }, 600);
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            const leftPos = Math.random() * 100;
+            const size = (Math.random() * 1) + 0.5;
+            const duration = (Math.random() * 8) + 8;
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            heart.style.left = `${leftPos}vw`;
+            heart.style.fontSize = `${size}rem`;
+            heart.style.animationDuration = `${duration}s`;
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), duration * 1000);
+        }
+
+        function createHearts() {
+            setInterval(spawnHeart, 600);
         }
         createHearts();
 
@@ -394,22 +444,14 @@
         // --- ENHANCED SECURITY FILTER ---
         const forbiddenNames = ['rungsita', 'abhirupa', 'rung', 'abhi', 'sugarmommy', 'sugarmom', 'sugar mommy', 'sugar mom', 'sugar mum', 'sugarmum', 'sugarmother', 'sugarmother'];
         const badWordList = [
-            // English
             'sex', 'penis', 'vagina', 'porn', 'fuck', 'shit', 'piss', 'dick', 'pussy', 'ass', 'boobs', 'tits', 'slut', 'whore', 'bitch', 'cunt', 'nude', 'naked',
-            // Bengali (Phonetic/Slang)
             'motherchod', 'motherchodr', 'modarchod', 'madrchod', 'gud', 'marani', 'gudmarani', 'bokachoda', 'khanki', 'khankirmagi', 'bal', 'mogi', 'shala', 'shali', 'gandu', 'choda', 'chodna', 'chodani', 'jhantu', 'jhant', 'danda', 'bara'
         ];
 
         function isInputSafe(input) {
-            // Remove spaces and special chars to catch bypass attempts like "m o t h e r c h o d"
             const cleanInput = input.toLowerCase().replace(/[^a-z0-9]/g, '');
-            
-            // 1. Exact match for blocked names
             if (forbiddenNames.some(name => cleanInput.includes(name))) return false;
-            
-            // 2. Check against bad word list
             if (badWordList.some(bad => cleanInput.includes(bad))) return false;
-            
             return true;
         }
 
@@ -449,7 +491,7 @@
             ]
         };
 
-        const nameVariants = ["Anudipta", "Anuu", "Anu"];
+        const nameVariants = ["Anudipta", "Anuu", "Anu", "Tiya"];
 
         function generatePoem() {
             const rawInput = document.getElementById('poem-theme').value.trim();
