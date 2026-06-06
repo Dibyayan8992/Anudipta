@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Anuu - Happy Bestfriend's Day ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080708;
+            --card-bg: rgba(18, 15, 17, 0.7);
+            --glow-pink: #ff4d6d;
+            --soft-gold: #ffe3e8;
+            --text-main: #f5f3f4;
+            --cosmic-purple: #24111e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 10% 12%, rgba(36, 17, 30, 0.7) 0px, transparent 50%),
+                radial-gradient(at 93% 88%, rgba(164, 22, 61, 0.2) 0px, transparent 50%);
+            font-family: 'Comfortaa', cursive;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Elegant Header Bar */
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 77, 109, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #ffe3e8, #ff4d6d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header-tag {
+            color: var(--glow-pink);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 77, 109, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(255, 77, 109, 0.05);
+        }
+
+        /* Split Screen Workspace */
+        .workspace {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 78px);
+            position: relative;
+        }
+
+        /* Left Side: Interactive Sky Map */
+        .cosmic-canvas-panel {
+            flex: 1.1;
+            position: relative;
+            border-right: 1px solid rgba(255, 77, 109, 0.1);
+            overflow: hidden;
+        }
+        #starCanvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+        .constellation-ui {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .star-node {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            pointer-events: auto;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px #fff, 0 0 30px var(--glow-pink);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .star-node::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: pulseRing 2s infinite linear;
+        }
+        .star-node:hover {
+            transform: translate(-50%, -50%) scale(1.4);
+            background: var(--glow-pink);
+        }
+        .star-label {
+            position: absolute;
+            top: 25px;
+            white-space: nowrap;
+            font-size: 0.75rem;
+            color: var(--soft-gold);
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .star-node:hover .star-label { opacity: 1; }
+
+        /* Floating Polaroid Elements */
+        .floating-polaroid {
+            position: absolute;
+            background: white;
+            padding: 8px 8px 16px 8px;
+            width: 130px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            pointer-events: auto;
+            z-index: 2;
+            cursor: grab;
+            transition: transform 0.2s ease, box-shadow 0.3s;
+        }
+        .floating-polaroid img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            background: #111;
+        }
+        .floating-polaroid p {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.65rem;
+            color: #222;
+            text-align: center;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .floating-polaroid:hover {
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.5);
+            z-index: 10;
+        }
+
+        /* Right Side: Showcase Keepsake Scroll Box */
+        .keepsake-panel {
+            flex: 0.9;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            background: rgba(11, 9, 10, 0.4);
+            backdrop-filter: blur(5px);
+            scrollbar-width: auto;
+        }
+        .keepsake-panel::-webkit-scrollbar { 
+            display: block; 
+            width: 6px;
+        }
+        .keepsake-panel::-webkit-scrollbar-thumb {
+            background: rgba(255, 77, 109, 0.3);
+            border-radius: 10px;
+        }
+
+        /* The Jar Display Architecture */
+        .jar-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 77, 109, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(255, 77, 109, 0.05);
+        }
+        .jar-graphic {
+            font-size: 5rem;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.3s ease;
+            animation: floatingJar 4s ease-in-out infinite;
+        }
+        .jar-graphic:hover {
+            transform: scale(1.15) rotate(7deg);
+        }
+
+        /* Sliding Hidden Drawer */
+        .drawer-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 0;
+        }
+        .drawer-container.open {
+            max-height: 200px;
+            margin-top: 20px;
+        }
+        .drawer-inner {
+            background: linear-gradient(135deg, rgba(255,77,109,0.1), rgba(36,17,30,0.4));
+            border: 1px dashed rgba(255, 179, 193, 0.3);
+            border-radius: 14px;
+            padding: 20px;
+            color: var(--soft-gold);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Typography Styled Letter Block */
+        .letter-vellum {
+            background: var(--card-bg);
+            border-left: 3px solid var(--glow-pink);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .letter-vellum h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--glow-pink);
+        }
+        .letter-content {
+            font-size: 0.95rem;
+            line-height: 1.9;
+            color: #d1ccdc;
+            text-align: justify;
+        }
+        .letter-content strong {
+            color: var(--glow-pink);
+            font-weight: normal;
+            border-bottom: 1px dashed var(--glow-pink);
+        }
+
+        /* Dynamic Update Display Box */
+        .dynamic-teleprompter {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 20px;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .teleprompter-placeholder {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+        }
+        .active-title {
+            color: var(--glow-pink);
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        .active-body {
+            font-size: 0.85rem;
+            color: #b1a7a6;
+            line-height: 1.6;
+        }
+
+        /* Premium Interactive Promise Button Component */
+        .promise-container {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        .promise-btn {
+            background: linear-gradient(135deg, #ff4d6d 0%, #a4163d 100%);
+            color: #ffffff;
+            font-family: 'Comfortaa', cursive;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 77, 109, 0.3), inset 0 0 10px rgba(255,255,255,0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .promise-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.6);
+            background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
+        }
+        .promise-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Custom Modal System Architecture */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(8, 7, 8, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-box {
+            background: linear-gradient(145deg, #120f11, #24111e);
+            border: 2px solid var(--glow-pink);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(255, 77, 109, 0.3);
+            transform: translateY(30px) scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .modal-overlay.active .modal-box {
+            transform: translateY(0) scale(1);
+        }
+        .modal-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: pulseRing 2s infinite alternate;
+            display: inline-block;
+        }
+        .modal-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--soft-gold);
+            margin-bottom: 15px;
+        }
+        .modal-box p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #d1ccdc;
+            margin-bottom: 25px;
+        }
+        .action-highlight {
+            display: block;                  /* Spreads element into its own clean layout block line */
+            background: rgba(255, 77, 109, 0.1);
+            border: 1px dashed var(--glow-pink);
+            padding: 14px 18px;             /* Better internal text alignment cushion */
+            border-radius: 12px;
+            font-weight: bold;
+            color: #fff;
+            margin-top: 20px;               /* Clean structural margin away from top text paragraph */
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+            line-height: 1.6;               /* Safeguards layout alignment from overlapping on wrap */
+        }
+        .modal-close-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #a197a6;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Comfortaa', cursive;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+        .modal-close-btn:hover {
+            color: #fff;
+            border-color: var(--glow-pink);
+            background: rgba(255, 77, 109, 0.05);
+        }
+
+        /* Keyframe Engines */
+        @keyframes floatingJar {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(-3deg); }
+        }
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); opacity: 0.9; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Enhanced Responsive Architecture & Mobile Guard Rails */
+        @media (max-width: 900px) {
+            body { 
+                overflow-y: auto; 
+            }
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            .workspace { 
+                flex-direction: column; 
+                height: auto; 
+            }
+            .cosmic-canvas-panel { 
+                min-height: 450px; 
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 77, 109, 0.1);
+            }
+            .keepsake-panel { 
+                width: 100%;
+                overflow-y: visible; 
+                height: auto; 
+                padding: 25px 20px; 
+            }
+            .letter-vellum {
+                padding: 20px;
+            }
+            .star-node .star-label {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Native Invisible Background Audio Element (Set to Continuous Repeat Loop) -->
+<audio id="bgMusic" loop>
+    <source src="bg.mp3" type="audio/mpeg">
+</audio>
+
+    <header>
+        <h1>Anudipta</h1>
+        <div class="header-tag">Best Friend's Day Space</div>
+    </header>
+
+    <div class="workspace">
+        
+        <div class="cosmic-canvas-panel">
+            <canvas id="starCanvas"></canvas>
+            
+            <div class="constellation-ui">
+                <div class="star-node" style="top: 25%; left: 30%;" onclick="focusMemory(0)">
+                    <div class="star-label">The First Spark</div>
+                </div>
+                <div class="star-node" style="top: 55%; left: 65%;" onclick="focusMemory(1)">
+                    <div class="star-label">The Comfort Zone</div>
+                </div>
+                <div class="star-node" style="top: 75%; left: 25%;" onclick="focusMemory(2)">
+                    <div class="star-label">The Present Day</div>
+                </div>
+            </div>
+
+            <div class="floating-polaroid" style="top: 10%; right: 15%; transform: rotate(6deg);" id="p1">
+                <img src="photo1.jpg" alt="Joy" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=&quot;height:110px;display:flex;align-items:center;justify-content:center;color:#666;font-size:10px;&quot;>✨ Photo 1</div>'">
+                <p>Laughter & Joy</p>
+            </div>
+
+            <div class="floating-polaroid" style="top: 40%; left: 8%; transform: rotate(-8deg);" id="p2">
+                <img src="photo2.jpg" alt="Inside Jokes" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=&quot;height:110px;display:flex;align-items:center;justify-content:center;color:#666;font-size:10px;&quot;>📸 Photo 2</div>'">
+                <p>Inside Jokes Only</p>
+            </div>
+
+            <div class="floating-polaroid" style="top: 68%; right: 20%; transform: rotate(4deg);" id="p3">
+                <img src="photo3.jpg" alt="Moments" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=&quot;height:110px;display:flex;align-items:center;justify-content:center;color:#666;font-size:10px;&quot;>💖 Photo 3</div>'">
+                <p>Unforgettable</p>
+            </div>
+        </div>
+
+        <div class="keepsake-panel">
+            
+            <div class="dynamic-teleprompter" id="teleprompter">
+                <div class="teleprompter-placeholder" id="promptPlaceholder">Tap onto any floating bright star in the galaxy map grid to inspect a timeline node.</div>
+                <div id="promptContent" style="display: none;">
+                    <div class="active-title" id="activeTitle">Memory Block</div>
+                    <div class="active-body" id="activeBody">Description text goes here.</div>
+                </div>
+            </div>
+
+            <div class="jar-card">
+                <div class="jar-graphic" onclick="openSecretDrawer()">🫙</div>
+                <p style="font-size: 0.8rem; color: var(--glow-pink); margin-top: 10px; letter-spacing: 1px;">TAP THE KEEPSAKE JAR</p>
+                
+                <div class="drawer-container" id="drawer">
+                    <div class="drawer-inner" id="drawerMessage">
+                        "Click onto the jar glass asset up top to draw an embedded note..."
+                    </div>
+                </div>
+            </div>
+
+            <div class="letter-vellum">
+                <h3>Dear Anuu,</h3>
+                <p class="letter-content">
+                    Sometimes I wonder if you truly realize the impact you have on the people around you. You walk into someone's life so naturally, so effortlessly, and before they even notice, you've already become one of the reasons they smile a little more, laugh a little louder, and feel a little stronger. For me, you've been exactly that person. What started as a simple friendship slowly became one of the most valuable parts of my life. Over time, our conversations turned into memories, our jokes turned into stories, and your presence became something I found myself looking forward to every day.<br><br>
+
+There are countless things I admire about you. It's not just your smile, though it has the strange ability to brighten even the dullest days. It's not just your kindness, though you've shown it more times than I can count. It's the way you care for people, the way you stay strong during difficult moments, the way you continue moving forward even when things aren't easy. You possess a quiet strength that many people overlook, yet it's one of the things that makes you truly extraordinary.<br><br>
+
+You have this beautiful habit of making others feel important without even realizing it. A simple message from you can make someone's day better. A simple conversation can turn a bad mood into a good memory. That's a rare gift, <strong>Anuu</strong>. In a world where people often forget to be kind, you remind everyone that genuine hearts still exist. And that's something worth being proud of.<br><br>
+
+Looking back, some of my favorite memories have one thing in common—you were there. Whether it was a random conversation, a silly argument, a shared laugh, or just sitting and talking about absolutely nothing, those moments somehow became special because they were spent with you. The funny thing is that the most meaningful people in our lives don't always arrive with grand entrances. Sometimes they quietly become part of our everyday routine, and one day we realize life wouldn't feel the same without them.<br><br>
+
+I hope you never stop being the person you are. I hope you continue chasing your dreams, believing in yourself, and showing the world the incredible person I know. You deserve every success that comes your way, every happiness that finds you, and every beautiful thing life has to offer. You deserve people who appreciate your worth, respect your heart, and remind you how amazing you are when you forget it yourself.<br><br>
+
+And if there's one thing I'd want you to remember, it's this: you are far more special than you think. Your presence matters. Your smile matters. Your words matter. You matter. There are people whose days become brighter simply because you're part of them. There are people who silently thank life for bringing you into their world. There are people who feel incredibly lucky to know you.<br><br>
+
+Maybe some bonds are difficult to explain because they're built from thousands of little moments rather than one big one. Maybe some people become important so gradually that we don't even notice it happening. But when we look back, we realize they became one of the most beautiful chapters of our story. For me, you'll always be that chapter—a person who brought happiness, comfort, inspiration, and countless unforgettable memories into my life.<br><br>
+
+No matter what happens in the future, I hope you always remember how much you are appreciated, how much you are valued, and how proud someone can be of the person you've become. Thank you for being you, <strong>Anuu</strong>. The world is genuinely a better place because you're in it, and some of the most beautiful things in life begin with a simple friendship and grow into something that words can never fully describe.
+                </p>
+            </div>
+
+            <div class="promise-container">
+                <button class="promise-btn" onclick="triggerPromiseModal()">
+                    Promise Me This ✨
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="promiseModal">
+        <div class="modal-box">
+            <span class="modal-icon">✨</span>
+            <h4>The Pinky Promise</h4>
+            <p>
+                By tapping onto this, you officially cross your heart and promise that we will keep this wonderful friendship alive, unfiltered, and irreplaceable forever. No matter how busy the universe gets!
+                <span class="action-highlight">👉 Now go and text me how is it! 👈</span>
+            </p>
+            <button class="modal-close-btn" onclick="closePromiseModal()">Close Sanctuary</button>
+        </div>
+    </div>
+
+    <script>
+        // Global Instant Ambient Autoplay Engine
+const nativeAudio = document.getElementById('bgMusic');
+
+function wakeUpAmbientAudio() {
+    nativeAudio.play().then(() => {
+        // Once music triggers seamlessly, tear down global event triggers completely
+        document.removeEventListener('click', wakeUpAmbientAudio);
+        document.removeEventListener('touchstart', wakeUpAmbientAudio);
+        document.removeEventListener('scroll', wakeUpAmbientAudio);
+        document.removeEventListener('mousemove', wakeUpAmbientAudio);
+    }).catch(err => {
+        // Fail silently and keep listening if browser is temporarily stubborn
+        console.log("Waiting for user gesture connection context...");
+    });
+}
+
+// Attach listeners to every natural user interaction to boot audio invisibly
+document.addEventListener('click', wakeUpAmbientAudio);
+document.addEventListener('touchstart', wakeUpAmbientAudio);
+document.addEventListener('scroll', wakeUpAmbientAudio);
+document.addEventListener('mousemove', wakeUpAmbientAudio);
+        // Cosmic Particle Ambient Canvas Setup
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class CosmicStar {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 1.2 + 0.2;
+                this.speed = Math.random() * 0.05 + 0.01;
+                this.factor = Math.random() * 100;
+            }
+            draw() {
+                this.factor += this.speed;
+                let alpha = Math.abs(Math.sin(this.factor));
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = "#ffffff";
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for(let i=0; i<80; i++) { stars.push(new CosmicStar()); }
+
+        function renderCosmicSky() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            ctx.strokeStyle = "rgba(255, 77, 109, 0.02)";
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            for(let i=0; i<stars.length; i+=15) {
+                ctx.moveTo(stars[i].x, stars[i].y);
+                if(stars[i+1]) ctx.lineTo(stars[i+1].x, stars[i+1].y);
+            }
+            ctx.stroke();
+
+            stars.forEach(s => s.draw());
+            requestAnimationFrame(renderCosmicSky);
+        }
+        renderCosmicSky();
+
+        // Memory Array for Map Node clicks
+        const historicalRecords = [
+            {
+                title: "✨ The First Spark",
+                desc: "When we first started talking, I didn't expect our connection to grow into something so beautifully irreplaceable."
+            },
+            {
+                title: "💫 The Comfort Zone",
+                desc: "Somewhere between late-night texts and effortless jokes, you became my safest space and favorite distraction."
+            },
+            {
+                title: "🔮 The Present Day",
+                desc: "Today, you're not just my best friend, Anuu. You're the brightest highlight of my everyday life."
+            }
+        ];
+
+        function focusMemory(index) {
+            document.getElementById('promptPlaceholder').style.display = 'none';
+            const contentBlock = document.getElementById('promptContent');
+            contentBlock.style.display = 'block';
+            
+            document.getElementById('activeTitle').innerText = historicalRecords[index].title;
+            document.getElementById('activeBody').innerText = historicalRecords[index].desc;
+        }
+
+        // Jar Drawer Core Engine
+        const storageNotes = [
+            "Your laugh is quite literally my absolute favorite sound in the world, Anuu.",
+            "Honestly? Even on my worst days, seeing your name pop up on my screen fixes everything instantly.",
+            "You possess an incredibly rare kind of magic that makes ordinary moments feel unforgettable.",
+            "If I had a star for every time you made me smile, we’d be staring at an entirely new galaxy right now.",
+            "Happy Best Friend's Day to the person who holds a status in my life that no one else could ever replicate. 💖"
+        ];
+        
+        let lastLoggedIndex = -1;
+        function openSecretDrawer() {
+            const drawer = document.getElementById('drawer');
+            const displayField = document.getElementById('drawerMessage');
+            
+            let targetIdx;
+            do {
+                targetIdx = Math.floor(Math.random() * storageNotes.length);
+            } while (targetIdx === lastLoggedIndex);
+            lastLoggedIndex = targetIdx;
+
+            drawer.classList.remove('open');
+            
+            setTimeout(() => {
+                displayField.innerHTML = `"${storageNotes[targetIdx]}"`;
+                drawer.classList.add('open');
+            }, 200);
+        }
+
+        // Modal Interactive Controls
+        function triggerPromiseModal() {
+            document.getElementById('promiseModal').classList.add('active');
+        }
+
+        function closePromiseModal() {
+            document.getElementById('promiseModal').classList.remove('active');
+        }
+
+        // Draggable Mechanics implementation for Floating Cards
+        const frames = document.querySelectorAll('.floating-polaroid');
+        frames.forEach(frame => {
+            let activeDrag = false;
+            let initialX, initialY, currentX = 0, currentY = 0;
+
+            frame.addEventListener('mousedown', dragStart);
+            document.addEventListener('mousemove', dragMove);
+            document.addEventListener('mouseup', dragEnd);
+
+            frame.addEventListener('touchstart', dragStart, { passive: false });
+            document.addEventListener('touchmove', dragMove, { passive: false });
+            document.addEventListener('touchend', dragEnd);
+
+            function dragStart(e) {
+                activeDrag = true;
+                let clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                let clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+                initialX = clientX - currentX;
+                initialY = clientY - currentY;
+            }
+
+            function dragMove(e) {
+                if (activeDrag) {
+                    if(e.cancelable) e.preventDefault();
+                    let clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+                    let clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+                    currentX = clientX - initialX;
+                    currentY = clientY - initialY;
+                    frame.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.05)`;
+                }
+            }
+
+            function dragEnd() {
+                if(activeDrag) {
+                    activeDrag = false;
+                    frame.style.transform = `translate(${currentX}px, ${currentY}px) scale(1)`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
