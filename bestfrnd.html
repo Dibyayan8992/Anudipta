@@ -452,7 +452,7 @@
 </head>
 <body>
     <!-- Native Invisible Background Audio Element (Set to Continuous Repeat Loop) -->
-<audio id="bgMusic" loop>
+<audio id="bgMusic" autoplay loop preload="auto">
     <source src="bg.mp3" type="audio/mpeg">
 </audio>
 
@@ -561,20 +561,21 @@ No matter what happens in the future, I hope you always remember how much you ar
         // Global Instant Ambient Autoplay Engine
 const nativeAudio = document.getElementById('bgMusic');
 
+window.addEventListener('load', () => {
+    nativeAudio.play().catch(err => {
+        console.log("Autoplay blocked by browser");
+    });
+});
+
 function wakeUpAmbientAudio() {
     nativeAudio.play().then(() => {
-        // Once music triggers seamlessly, tear down global event triggers completely
         document.removeEventListener('click', wakeUpAmbientAudio);
         document.removeEventListener('touchstart', wakeUpAmbientAudio);
         document.removeEventListener('scroll', wakeUpAmbientAudio);
         document.removeEventListener('mousemove', wakeUpAmbientAudio);
-    }).catch(err => {
-        // Fail silently and keep listening if browser is temporarily stubborn
-        console.log("Waiting for user gesture connection context...");
-    });
+    }).catch(() => {});
 }
 
-// Attach listeners to every natural user interaction to boot audio invisibly
 document.addEventListener('click', wakeUpAmbientAudio);
 document.addEventListener('touchstart', wakeUpAmbientAudio);
 document.addEventListener('scroll', wakeUpAmbientAudio);
